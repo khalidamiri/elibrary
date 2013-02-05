@@ -23,6 +23,7 @@ public class DocumentManager extends HashMap<Integer, Document> implements Docum
 	
 	public void addDocument(Document newDoc){
 		// TODO add the docment to the database and get the id
+		
 		this.put(newDoc.getId(), newDoc);
 	}
 

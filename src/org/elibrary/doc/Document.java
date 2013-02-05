@@ -31,7 +31,7 @@ public abstract class Document {
 		return uploadDate;
 	}
 	public void setUploadDate(Date uploadDate) {
-		this.uploadDate = uploadDate;
+//		this.uploadDate = uploadDate;
 	}
 	public String getDescription() {
 		return description;

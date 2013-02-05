@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Upload Book</h1>
-	<form action="UploadDoc">
+	<form action="UploadDoc" method="POST" enctype="multipart/form-data">
 		File: <input type="file" name="file" />
 		Title: <input type="text" name="title" />
 		Author: <input type="text" name="author" />

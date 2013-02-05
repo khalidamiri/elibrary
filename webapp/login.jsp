@@ -9,7 +9,7 @@
 <body>
 	<h1>Login Form</h1>
 	<p>Please enter your username and password</p>
-	<form action="LoginServlet">
+	<form action="LoginServlet" method="POST">
 		<input type="text" name="userName" />
 		<input type="password" name="password" />
 		<input type="submit" name="submit" />

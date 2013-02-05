@@ -27,13 +27,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		UserManager um = new UserManager();
-		User user = um.authenticateUser(Integer.parseInt(request.getParameter("userName")), request.getParameter("password"));
-		if(user == null)
-			System.out.println("Login fail");
-		else
-			System.out.println("Welcom" + user.getFirstName() + " " + user.getLastName());
 		
 	}
 
@@ -41,7 +34,14 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		UserManager um = new UserManager();
+		User user = um.authenticateUser(Integer.parseInt(request.getParameter("userName")), request.getParameter("password"));
+		if(user == null)
+			System.out.println("Login fail");
+		else{
+			System.out.println("Welcom" + user.getFirstName() + " " + user.getLastName());
+			response.sendRedirect("upload.jsp");
+		}
 	}
 
 }

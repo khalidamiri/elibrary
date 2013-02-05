@@ -36,13 +36,21 @@ public class UploadDoc extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		InputStreamReader in= new InputStreamReader(request.getInputStream());
-		BufferedReader bufRead = new BufferedReader(in);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		BufferedReader bufRead = new BufferedReader(in);
+/*		String line = "";
+		while(bufRead.readLine()!=null){
+			line=bufRead.readLine();
+			System.out.println("Multipart data: " + line);
+		}
+*/		
 		
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		
-		FileItemFactory factory = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(factory);
+		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 		try {
 			List reqItems = upload.parseRequest(request);
 			Iterator iter = reqItems.iterator();
@@ -50,12 +58,14 @@ public class UploadDoc extends HttpServlet {
 				FileItem item = (FileItem) iter.next();
 				if(item.isFormField()){
 					String fieldName = item.getFieldName();
-					String filedValue = item.getString();
+					String fieldValue = item.getString();
+					System.out.println("The fields: " + fieldName + " : " + fieldValue);
 				}
 				else{
 					String fileName = item.getName();
 					String contentType = item.getContentType();
 					boolean isInMemory = item.isInMemory();
+					byte[] b = item.get();
 					System.out.println("Following file uploaded: " + fileName + " : " + contentType + " : " + isInMemory);
 				}
 			}
@@ -65,13 +75,6 @@ public class UploadDoc extends HttpServlet {
 		}
 		
 		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }
