@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserManager um = new UserManager();
-		User user = um.authenticateUser(Integer.parseInt(request.getParameter("userName")), request.getParameter("password"));
+		User user = um.authenticateUser(request.getParameter("loginUserName"), request.getParameter("loginPassword"));
 		if(user == null)
 			System.out.println("Login fail");
 		else{

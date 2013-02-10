@@ -1,6 +1,9 @@
 package org.elibrary.control;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+
+import org.elibrary.doc.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,6 +29,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class UploadDoc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	DocumentManagerInterface dm = new DocumentManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,36 +45,42 @@ public class UploadDoc extends HttpServlet {
 	}
 
 	/**
+	 * Gets the book and its information from the book upload form, and converts is to a book object.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		BufferedReader bufRead = new BufferedReader(in);
-/*		String line = "";
-		while(bufRead.readLine()!=null){
-			line=bufRead.readLine();
-			System.out.println("Multipart data: " + line);
-		}
-*/		
-		
+		// TODO Add the validation part either in here or wherever its proper.
 		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+		Book newBook = new Book();
+		HashMap<String, String> bookFormData = new HashMap<String, String>();
 		try {
 			List reqItems = upload.parseRequest(request);
 			Iterator iter = reqItems.iterator();
 			while(iter.hasNext()){
 				FileItem item = (FileItem) iter.next();
 				if(item.isFormField()){
-					String fieldName = item.getFieldName();
-					String fieldValue = item.getString();
-					System.out.println("The fields: " + fieldName + " : " + fieldValue);
+					bookFormData.put(item.getFieldName(), item.getString());
 				}
 				else{
 					String fileName = item.getName();
 					String contentType = item.getContentType();
 					boolean isInMemory = item.isInMemory();
 					byte[] b = item.get();
-					System.out.println("Following file uploaded: " + fileName + " : " + contentType + " : " + isInMemory);
+					newBook.setPdf(b);
+//					System.out.println("Following file uploaded: " + fileName + " : " + contentType + " : " + isInMemory);
 				}
 			}
+			newBook.setTitle(bookFormData.get("title"));
+			newBook.setAuthor(bookFormData.get("author"));
+			newBook.setPublisher(bookFormData.get("publisher"));
+			newBook.setUploadDate(new Date());
+			newBook.setDescription(bookFormData.get("description"));
+			newBook.setPrivacy(Privacy.PUBLIC);
+			// TODO This should be userid not user, get the userid from session
+			newBook.setUploader(null);
+			newBook.setTags(bookFormData.get("tags"));
+			dm.addBook(newBook);
+			
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

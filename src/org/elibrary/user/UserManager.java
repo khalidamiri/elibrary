@@ -1,18 +1,28 @@
 package org.elibrary.user;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
+import org.elibrary.db.ObjectToTable;
 import org.elibrary.db.TableToObject;
 
-public class UserManager extends HashMap<Integer, User> implements UserManagerInterface {
+public class UserManager extends HashMap<String, User> implements UserManagerInterface {
 
+	TableToObject tto = new TableToObject();
+	ObjectToTable ott = new ObjectToTable();
 
 	public UserManager(){
 		// TODO load users from the database
 	}
 	
 	public void addUser(User newUser) {
-		// TODO add the user to database
+		this.put(newUser.getUserName(), newUser);
+		try {
+			ott.userToTable(newUser);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public User getUser(int userName) {
@@ -28,9 +38,12 @@ public class UserManager extends HashMap<Integer, User> implements UserManagerIn
 		}
 	}
 	
-	public User authenticateUser(int userName, String password){
-		TableToObject tto = new TableToObject();
+	public User authenticateUser(String userName, String password){
 		return tto.tableToUser(userName, password);
+	}
+	
+	public boolean validateUser(String username){
+		return tto.doesExist(username, "user", "userName");
 	}
 
 }

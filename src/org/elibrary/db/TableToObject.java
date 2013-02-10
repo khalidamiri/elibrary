@@ -13,12 +13,12 @@ public class TableToObject {
 	Connection conn = db.connect();
 	Statement stmt;
 
-	public static void main(String args[]){
+/*	public static void main(String args[]){
 		TableToObject tto = new TableToObject();
 		User user1 = tto.tableToUser(1, "password");
 		System.out.println(user1.getFirstName() + " " + user1.getLastName());
 	}
-
+*/
 	public Book tableToBook(int bookId){
 		String query = "SELECT * FROM book WHERE idBook = " + bookId;
 		Book book = new Book();
@@ -46,15 +46,15 @@ public class TableToObject {
 		}
 		return book;
 	}
-	public User tableToUser(int userName, String password){
-		String query = "SELECT * FROM user WHERE userName = " + userName + " and password = \"" + password + "\";";
+	public User tableToUser(String userName, String password){
+		String query = "SELECT * FROM user WHERE userName = \"" + userName + "\" and password = \"" + password + "\";";
 		System.out.println(query);
 		User user = new User();
 		try {
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()){
-				user.setUserName(rs.getInt("userName"));
+				user.setUserName(rs.getString("userName"));
 				user.setPassword(rs.getString("password"));
 				user.setFirstName(rs.getString("firstName"));
 				user.setLastName(rs.getString("lastName"));
@@ -80,5 +80,25 @@ public class TableToObject {
 		stmt.close();
 		rs.close();
 		conn.close();
+	}
+	
+	public boolean doesExist(String item, String table, String col){
+		String query = "SELECT " + col + " FROM " + table + " WHERE " + col + " = \"" + item + "\"";
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			if(rs.next()){
+				System.out.println(rs);
+				System.out.println(rs.getString(1));
+				return true;
+			}else{
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return true;
+		}
 	}
 }

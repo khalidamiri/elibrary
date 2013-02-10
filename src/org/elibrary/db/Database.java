@@ -22,7 +22,7 @@ public class Database {
 			Class.forName(dbd.get("mysql-native"));
 	
 			// Create connection
-			conn = DriverManager.getConnection(connStr, user, pw);
+			conn = DriverManager.getConnection(connStr, user, null);
 			
 			return conn;
 		} catch (ClassNotFoundException e) {

@@ -1,0 +1,209 @@
+
+/*		The eLibrary main UI Javascript file		*/
+
+body{
+	margin:0;
+	background-color:#f5f5f5;
+	font:normal 12px arial, sans, serif;
+	text-align:center;
+}
+#contentWrapper{
+	width:900px;
+	margin:0 auto 0 auto;
+	box-shadow:0px 0px 4px #2D3A4B;
+	min-height:500px;
+	margin-top:3px;
+}
+h1{
+	font:bold 20px arial, sans;
+	color:#2D3A4B;
+}
+
+.showLoginBtn{
+	float:right;
+	position:relative;
+	right:-5-px;
+	border-top-right-radius:0px;
+	border-top-left-radius:0px;
+	top:-9px;
+}
+#uploadBtn{
+	display:none;
+	float:right;
+	color:#ED4337;
+	width:100px;
+	border-top-right-radius:0px;
+	border-top-left-radius:0px;
+	top:-9px;
+}
+#registerBtn{
+	border-bottom-left-radius:0;
+	float:right;
+	width:100px;
+	top:-9px;
+	z-index:9000;
+}
+#hdrWrapper{
+	z-index:-900;
+	width:100%;
+	margin:0;
+	color:white;
+	height:35px;
+	background-color:#ED4337;
+	border-bottom:solid 30px #2D3A4B;
+	box-shadow:0px 0px 2px #2D3A4B;
+}
+
+#hdrWrapper #hdr{
+	width:900px;
+	height:35px;
+	margin:0 auto 0 auto;
+	position:relative;
+	padding:5px 0 5px 0;
+}
+
+#hdr h1{
+	margin:0px;
+	float:left;
+	color:white;
+	margin-top:-3px;
+	font-size:22px;
+}
+
+#search{
+	float:right;
+	z-index:100;
+	background-color:#2D3A4B;
+	position:relative;
+	top:-5px;
+	right:px;
+	margin-left:10px;
+	width:450px;
+	height:25px;
+	padding:2px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+#search input{
+	color:#909090;
+	height:15px;
+	width:300px;
+	padding:4px;
+	font-size:12px;
+	border-width:0px;
+	border-radius:2px;
+	box-shadow:inset 0px 0px 1px #2D3A4B;
+	padding-right:36px;
+}
+#search a{
+	color:white;
+	margin-left:-35px;
+}
+
+#search #searchBtn{
+	width:30px;
+	height:22px;
+	position:relative;
+	top:-2px;
+	left:-37px;
+}
+#search #curveL{
+	position:absolute;
+	bottom:0px;
+	left:-13px;
+}
+#search #curveR{
+	position:absolute;
+	top:-2px;
+	right:-13px;
+}
+#hdr2{
+	margin-top:-30px;
+	text-align:left;
+	position:relative;
+}
+#categories{
+	position:relative;
+	top:5px;
+	display:inline;
+	list-style:none;
+	color:white;
+	font-size:14px;
+	font-weight:bold;
+	padding:4px;
+}
+#categories li{
+	display:inline;
+}
+
+#topLogin{
+	float:right;
+	width:200px;
+	position:absolute;
+	top:29px;
+	right:2px;
+	background-color:#f5f5f5;
+	border-radius:3px;
+	border-top-right-radius:0;
+	padding:8px;
+	box-shadow:0px 1px 1px 1px #2D3A4B;
+	box-shadow: 0px 0px 2px #2D3A4B;
+	z-index:900;
+}
+#topLogin a:link, #topLogin a:visited{
+	margin:10px;
+}
+#topLogin input{
+	color:#909090;
+	width:190px;
+	height:22px;
+	margin-top:5px;
+}
+#topLogin #loginSubmitBtn{
+	float:right;
+	margin:5px;
+}
+#showLoginBtn{
+	float:right;
+	top:-9px;
+	right:-4px;
+	border-bottom-right-radius:0;
+	border-top-right-radius:0;
+	border-top-left-radius:0;
+	z-index:9000;
+}
+
+
+#mainContent{
+	margin-top:30px;
+	text-align:left;
+	padding:20px;
+}
+
+#hdr button{
+	margin-right:0;
+	margin-left:0;
+}
+
+#mainContent form{
+	padding-left:20px;
+	width:400px;
+	line-height:30px;
+}
+#mainContent form input, form select{
+	float:right;
+	width:250px;
+}
+#mainContent form label{
+	float:left;
+	font-size:12px;
+	font-weight:bold;
+}
+#mainContent h1{
+	margin-left:20px;
+	color:#ED4337;
+}
+#mainContent button{
+	float:right;
+}

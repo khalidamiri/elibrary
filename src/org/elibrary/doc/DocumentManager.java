@@ -1,10 +1,12 @@
 package org.elibrary.doc;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import org.elibrary.db.*;
 
-public class DocumentManager extends HashMap<Integer, Document> implements DocumentManagerInterface{
-	TableToObject too = new TableToObject();
+public class DocumentManager extends HashMap<Integer, Book> implements DocumentManagerInterface{
+	TableToObject tto = new TableToObject();
+	ObjectToTable ott = new ObjectToTable(); 
 
 /*	public static void main(String args[]){
 		DocumentManager dm = new DocumentManager();
@@ -13,21 +15,25 @@ public class DocumentManager extends HashMap<Integer, Document> implements Docum
 	}
 */	
 	public DocumentManager(){
-		Book book = too.tableToBook(1);		
+		Book book = tto.tableToBook(1);
 		this.put(1, book);
 	}
 	
-	public Document getDocument(int id){
+	public Book getBook(int id){
 		return this.get(id);
 	}
 	
-	public void addDocument(Document newDoc){
+	public void addBook(Book newBook){
 		// TODO add the docment to the database and get the id
-		
-		this.put(newDoc.getId(), newDoc);
+		try {
+			ott.bookToTable(newBook);
+			this.put(newBook.getId(), newBook);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 
-	public void removeDocument(int id){
+	public void removeBook(int id){
 		// TODO remove the docment from the database too
 		this.remove(id);
 	}
