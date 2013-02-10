@@ -27,17 +27,18 @@ public class TableToObject {
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()){
 				book.setTitle(rs.getString("name"));
-//				book.setAuthor(rs.getString("author"));
-				book.setPublisher(rs.getString("publisher"));
-//				book.setThumbnail(rs.getBlob(null));	// TODO Update this to generating thumbnail from the pdf
-//				book.setUploadDate(rs.getDate("uploadDate"));
+				book.setAuthor(rs.getInt("author"));
+				book.setPublisher(rs.getInt("publisher"));
+//				book.setThumbnail(rs.getBytes());	// TODO Update this to generating thumbnail from the pdf
+				book.setUploadDate(rs.getDate("uploadDate"));
+				Blob blob = rs.getBlob(1);
 				book.setDescription(rs.getString("description"));
 				book.setPrivacy(null);		// TODO convert the privacy string returned from the table to type Privacy
-//				book.setpdf(rs.getBlob("pdf"));
-				book.setUploader(null);		// TODO change the null
+				book.setPdf(rs.getBytes("file"));
+				book.setUploader(rs.getString("uploader"));		// TODO change the null
 				book.setTags(rs.getString("tags"));	
 				// TODO the book mark should be generated in here
-				book.setCollection(null);		// TODO change the null
+				book.setCategory(rs.getInt("category"));		// TODO change the null
 			}
 			this.closeConnection(stmt, rs, conn);
 		} catch (SQLException e) {
