@@ -25,15 +25,15 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 /**
  * Servlet implementation class UploadDoc
  */
-@WebServlet("/UploadDoc")
-public class UploadDoc extends HttpServlet {
+@WebServlet("/AddBook")
+public class AddBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	DocumentManagerInterface dm = new DocumentManager();
+	BookManager bm = new BookManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadDoc() {
+    public AddBook() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -71,16 +71,17 @@ public class UploadDoc extends HttpServlet {
 				}
 			}
 			newBook.setTitle(bookFormData.get("title"));
-			newBook.setAuthor(bookFormData.get("author"));
-			newBook.setPublisher(bookFormData.get("publisher"));
+			// TODO the author and publisher should return int not string from the form.
+			newBook.setCategory(1);
+			newBook.setPublisher(1);
 			newBook.setUploadDate(new Date());
 			newBook.setDescription(bookFormData.get("description"));
 			newBook.setPrivacy(Privacy.PUBLIC);
 			// TODO This should be userid not user, get the userid from session
 			newBook.setUploader(null);
 			newBook.setTags(bookFormData.get("tags"));
-			dm.addBook(newBook);
-			
+			bm.addBook(newBook);
+			response.sendRedirect("viewBook.html");
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

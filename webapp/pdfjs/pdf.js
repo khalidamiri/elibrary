@@ -17,8 +17,7 @@
 
 var PDFJS = {};
 PDFJS.version = '0.7.2';
-PDFJS.build = ''git' is not recognized as an internal or external command,operable program or batch file.
-';
+PDFJS.build = "'git' is not recognized as an internal or external command, operable program or batch file.";
 
 (function pdfjsWrapper() {
   // Use strict in our context only - users might not want it
@@ -73,11 +72,7 @@ function getPdf(arg, callback) {
   var params = arg;
   if (typeof arg === 'string')
     params = { url: arg };
-//#if !B2G
   var xhr = new XMLHttpRequest();
-//#else
-//var xhr = new XMLHttpRequest({mozSystem: true});
-//#endif
   xhr.open('GET', params.url);
 
   var headers = params.headers;
@@ -15972,7 +15967,6 @@ function mapPrivateUseChars(code) {
 }
 
 var FontLoader = {
-//#if !(MOZCENTRAL)
   loadingContext: {
     requests: [],
     nextRequestId: 0
@@ -16169,22 +16163,6 @@ var FontLoader = {
       document.body.appendChild(frame);
       /** Hack end */
   }
-//#else
-//bind: function fontLoaderBind(fonts, callback) {
-//  assert(!isWorker, 'bind() shall be called from main thread');
-//
-//  for (var i = 0, ii = fonts.length; i < ii; i++) {
-//    var font = fonts[i];
-//    if (font.attached)
-//      continue;
-//
-//    font.attached = true;
-//    font.bindDOM()
-//  }
-//
-//  setTimeout(callback);
-//}
-//#endif
 };
 
 var UnicodeRanges = [
@@ -37984,4 +37962,5 @@ var JpegImage = (function jpegImage() {
 
 
 }).call((typeof window === 'undefined') ? this : window);
+
 

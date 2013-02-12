@@ -7,7 +7,7 @@ public class Database {
 	private String connStr = "jdbc:mysql://localhost:3306/elibrary";
 	private Connection conn = null;
 	private String user = "root";
-	private String pw = "";
+	private String pw = "allahisone";
 	
 
 /*	public static void main(String[] args){
@@ -22,7 +22,7 @@ public class Database {
 			Class.forName(dbd.get("mysql-native"));
 	
 			// Create connection
-			conn = DriverManager.getConnection(connStr, user, null);
+			conn = DriverManager.getConnection(connStr, user, pw);
 			
 			return conn;
 		} catch (ClassNotFoundException e) {

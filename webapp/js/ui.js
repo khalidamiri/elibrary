@@ -4,7 +4,91 @@
 $(document).ready(function(){
 
 
-	$('button').button().css({'margin': '2px'});
+	var categories = [];
+	var publishers = [];
+	var authors = [];
+
+	var getCats= function(){
+		if(XMLHttpRequest){
+			var xmlhttp = new XMLHttpRequest();
+		}else{
+			var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open('GET', 'http://localhost:8080/eLibrary/GetList?name=category', true);
+		xmlhttp.send();
+		
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				this.resp = xmlhttp.responseText;
+				if(this.resp.length > 0){
+					this.list = this.resp.split(",");
+					categories = this.list;
+					var cats = "";
+					for(i in categories){
+						cats = cats + "<li><a href='http://localhost:8080/GetCategory?name="+ categories[i].substring(0, 1) +"'>" + categories[i].substring(4) + "</a></li><span style='color:#ED4337;'>/</span>";
+					}
+					$('#hdr2 #categories').html(cats);
+				}
+			}
+		};
+	};
+
+	var getPubs= function(){
+		if(XMLHttpRequest){
+			var xmlhttp = new XMLHttpRequest();
+		}else{
+			var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open('GET', 'http://localhost:8080/eLibrary/GetList?name=publisher', true);
+		xmlhttp.send();
+		
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				this.resp = xmlhttp.responseText;
+				if(this.resp.length > 0){
+					this.list = this.resp.split(",");
+					publishers = this.list;
+				}
+			}
+		};
+	};
+
+	var getAuths= function(){
+		if(XMLHttpRequest){
+			var xmlhttp = new XMLHttpRequest();
+		}else{
+			var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open('GET', 'http://localhost:8080/eLibrary/GetList?name=author', true);
+		xmlhttp.send();
+		
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				this.resp = xmlhttp.responseText;
+				if(this.resp.length > 0){
+					this.list = this.resp.split(",");
+					authors = this.list;
+				}
+			}
+		};
+	};
+
+	// Load all the lists
+	(function(){
+		getCats();
+		getPubs();
+		getAuths();
+
+	
+		// Display the list of categories in navigation
+	})();
+	
+
+
+	
+	// Have to limit this to hdrWrapper and contentWrapper or it will mess up the book viewer
+	$('#hdrWrapper button, #contentWrapper button').button().css({'margin': '2px'});
+
 	$('#registerBtn').bind('click', function(){
 		window.location="http://localhost:8080/eLibrary/registerUser.html";
 	});
@@ -60,7 +144,7 @@ $(document).ready(function(){
 	$('.dateField').datepicker();
 	
 	
-	// Create XHR Object
+	// Username validation
 	$('#userName').focusout(function(){
 		if(XMLHttpRequest){
 			xmlhttp = new XMLHttpRequest();
@@ -143,5 +227,21 @@ $(document).ready(function(){
 		"border": "solid 1px #909090"
 	});
 	$('#registerUser button[type=submit]').attr('disabled', 'disabled');
+
+	
+	// autocomplete categories
+	$('#uploadForm #category').focus(function(){
+		$(this).autocomplete({source: categories});
+	});
+
+	// autocomplete publishers
+	$('#uploadForm #publisher').focus(function(){
+		$(this).autocomplete({source: publishers});
+	});	
+
+	// autocomplete authors
+	$('#uploadForm #author').focus(function(){
+		$(this).autocomplete({source: authors});
+	});	
 
 });

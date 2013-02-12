@@ -10,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.elibrary.doc.Category;
+import org.elibrary.doc.CategoryManager;
 import org.elibrary.user.*;
 /**
  * Servlet implementation class AddUser
@@ -30,24 +33,19 @@ public class AddCategory extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		Category newCategory = new Category();
+		CategoryManager cm = new CategoryManager();
+		newCategory.setName(request.getParameter("catName"));
+		newCategory.setDescription(request.getParameter("catDesc"));
+		System.out.println(newCategory.getName());
+		cm.addCategory(newCategory);
+		response.sendRedirect("addPublisher.html");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User newUser = new User();
-		UserManagerInterface um = new UserManager();
-		newUser.setUserName(request.getParameter("userName"));
-		newUser.setFirstName(request.getParameter("firstName"));
-		newUser.setLastName(request.getParameter("lastName"));
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-		newUser.setEmail(request.getParameter("email"));
-		newUser.setPassword(request.getParameter("password"));
-		newUser.setDateJoined(new Date());
-		System.out.println(newUser.getFirstName());
-		um.addUser(newUser);
 	}
 
 }

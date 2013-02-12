@@ -27,20 +27,19 @@ public class TableToObject {
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()){
 				book.setTitle(rs.getString("name"));
-				book.setAuthor(rs.getInt("author"));
+//				book.setAuthor(rs.getInt("author"));
 				book.setPublisher(rs.getInt("publisher"));
 //				book.setThumbnail(rs.getBytes());	// TODO Update this to generating thumbnail from the pdf
 				book.setUploadDate(rs.getDate("uploadDate"));
-				Blob blob = rs.getBlob(1);
 				book.setDescription(rs.getString("description"));
 				book.setPrivacy(null);		// TODO convert the privacy string returned from the table to type Privacy
-				book.setPdf(rs.getBytes("file"));
+				Blob blob = rs.getBlob("file");
+				book.setPdf(blob.getBytes(1, (int)blob.length()));
 				book.setUploader(rs.getString("uploader"));		// TODO change the null
 				book.setTags(rs.getString("tags"));	
 				// TODO the book mark should be generated in here
 				book.setCategory(rs.getInt("category"));		// TODO change the null
 			}
-			this.closeConnection(stmt, rs, conn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,5 +100,49 @@ public class TableToObject {
 			e.printStackTrace();
 			return true;
 		}
+	}
+	public StringBuffer getList(String listName) {
+		String tableName = "";
+		String id = "";
+		String name = "";
+		System.out.println(listName);
+		if(listName.equals("category")){
+			tableName="category";
+			id="idCATEGORY";
+			name="name";
+		}else if(listName.equals("publisher")){
+			tableName="publisher";
+				id="idPUBLISHER";
+				name="pubName";
+		}else if(listName.equals("author")){
+			tableName="author";
+			id="idAuthor";
+			name="name";
+		}else{
+			tableName = "";
+			id = "";
+			name = "";
+		}
+		System.out.println(id + " " + name);
+		String query = "SELECT " + id + ", " + name + " FROM " + tableName;
+		System.out.println(query);
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			StringBuffer sb = new StringBuffer();
+			String delim = "";
+			while(rs.next()){
+				sb.append(delim);
+				sb.append("" + rs.getInt(1) + " - " + rs.getString(2) + "");
+				delim = ",";
+			}
+			System.out.println(sb);
+			return sb;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 }

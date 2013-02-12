@@ -1,6 +1,6 @@
 package org.elibrary.doc;
 
-public class Author implements AuthorInterface{
+public class Author {
 
 	private String name;
 	private String bio;

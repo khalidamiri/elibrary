@@ -7,19 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.elibrary.user.*;
+import org.elibrary.db.TableToObject;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class GetList
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/GetList")
+public class GetList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	TableToObject tto = new TableToObject();
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public GetList() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -27,21 +29,16 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String list = tto.getList(request.getParameter("name")).toString();
+		System.out.println(list);
+		response.getWriter().write(list.toCharArray());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserManager um = new UserManager();
-		User user = um.authenticateUser(request.getParameter("loginUserName"), request.getParameter("loginPassword"));
-		if(user == null)
-			System.out.println("Login fail");
-		else{
-			System.out.println("Welcom" + user.getFirstName() + " " + user.getLastName());
-			response.sendRedirect("addCategory.html");
-		}
+		// TODO Auto-generated method stub
 	}
 
 }

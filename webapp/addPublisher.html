@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>eLibrary: Upload Book</title>
+	<title>eLibrary: Register User</title>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery.ui.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/theme.ui/jquery.ui.min.css" />
@@ -21,8 +21,8 @@
 			<button id="showLoginBtn" class="loginRegister">Login</button>
 			<div id="topLogin">
 				<form action="LoginServlet" method="POST">
-					<input type="text" name="userName" id="userName" value="Username" /><br />
-					<input type="text" name="password" id="password" value="Password" /><br />
+					<input type="text" name="userName" id="loginUserName" value="Username" /><br />
+					<input type="text" name="password" id="loginPassword" value="Password" /><br />
 					<a href="" style="float:right;">I forgot my password.</a>
 					<button type="submit" id="loginSubmitBtn">Login</button>
 				</form>
@@ -45,21 +45,11 @@
 		</div>
 
 		<div id="mainContent">
-			<h1>Upload Book</h1><hr />
-			<form action="AddBook" method="POST" id="uploadForm" enctype="multipart/form-data">
-				<label>File: </label><input type="file" name="file" /><br />
-				<label>Title: </label><input type="text" name="title" id="title" /><br />
-				<label>Category: </label><input name="category" id="category" /><br />
-				<label>Author: </label><input name="author" id="author" /><br />
-				<label>Publication Date: </label><input type="text" name="pubDate" class="dateField" id="pubDate" /><br />
-				<label>Publisher: </label><input name="publisher" id="publisher" /><br />
-				<label>Privacy: </label><select type="text" name="privacy">
-					<option>Private</option>
-					<option>Public</option>
-				</select><br />
-				<label>Tags: </label><input type="text" name="tags" /><br />
-				<label>Description: </label><input type="text" rows="4" name="description" /><br />
-				<div><button type="submit">Upload</button></div><br />
+			<h1>Add Publisher</h1><hr />
+			<form action="AddPublisher" method="GET" id="addPublisherForm">
+				<label id="pubNameLbl">Name:* </label><input type="text" name="pubName" id="pubName" /><br />
+				<label id="pubDescLbl">Description: </label><input type="text" name="pubDesc" id="pubDesc" /><br />
+				<button type="submit">Add Publisher</button><br />
 			</form>
 		</div>
 	</div>

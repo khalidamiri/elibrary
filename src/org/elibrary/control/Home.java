@@ -6,20 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.elibrary.user.*;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class Home
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet({ "/Home", "/" })
+public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public Home() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -27,21 +27,19 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		if(session.getAttribute("userName") == null){
+			session.setAttribute("userName", "guest");
+		}
 		
+		response.getWriter().write("<b>Hi " +session.getAttribute("userName") + "</b>");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserManager um = new UserManager();
-		User user = um.authenticateUser(request.getParameter("loginUserName"), request.getParameter("loginPassword"));
-		if(user == null)
-			System.out.println("Login fail");
-		else{
-			System.out.println("Welcom" + user.getFirstName() + " " + user.getLastName());
-			response.sendRedirect("addCategory.html");
-		}
+		// TODO Auto-generated method stub
 	}
 
 }

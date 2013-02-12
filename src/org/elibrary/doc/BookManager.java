@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import org.elibrary.db.*;
 
-public class DocumentManager extends HashMap<Integer, Book> implements DocumentManagerInterface{
+public class BookManager extends HashMap<Integer, Book> {
 	TableToObject tto = new TableToObject();
 	ObjectToTable ott = new ObjectToTable(); 
 
@@ -14,13 +14,13 @@ public class DocumentManager extends HashMap<Integer, Book> implements DocumentM
 		System.out.println(book.getId() + ", \"" + book.getTitle() + "\", \"" + book.getDescription() + "\", " + book.getPrivacy());
 	}
 */	
-	public DocumentManager(){
+	public BookManager(){
 		Book book = tto.tableToBook(1);
 		this.put(1, book);
 	}
 	
 	public Book getBook(int id){
-		return this.get(id);
+		return tto.tableToBook(id);
 	}
 	
 	public void addBook(Book newBook){

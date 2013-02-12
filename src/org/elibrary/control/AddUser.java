@@ -18,6 +18,7 @@ import org.elibrary.user.*;
 public class AddUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	UserManager um = new UserManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,8 +38,7 @@ public class AddUser extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Category newCategory = new Category();
-		CategoryManager cm = new CategoryManager();
+		User newUser = new User();
 		newUser.setUserName(request.getParameter("userName"));
 		newUser.setFirstName(request.getParameter("firstName"));
 		newUser.setLastName(request.getParameter("lastName"));

@@ -2,6 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>eLibrary</display-name>
   <welcome-file-list>
+    <welcome-file>Home</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -14,5 +15,76 @@
   <servlet-mapping>
     <servlet-name>jsp</servlet-name>
     <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddAuthor</display-name>
+    <servlet-name>AddAuthor</servlet-name>
+    <servlet-class>org.elibrary.control.AddAuthor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddAuthor</servlet-name>
+    <url-pattern>/AddAuthor</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddCategory</display-name>
+    <servlet-name>AddCategory</servlet-name>
+    <servlet-class>org.elibrary.control.AddCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCategory</servlet-name>
+    <url-pattern>/AddCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddPublisher</display-name>
+    <servlet-name>AddPublisher</servlet-name>
+    <servlet-class>org.elibrary.control.AddPublisher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddPublisher</servlet-name>
+    <url-pattern>/AddPublisher</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddBook</display-name>
+    <servlet-name>AddBook</servlet-name>
+    <servlet-class>org.elibrary.control.AddBook</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddBook</servlet-name>
+    <url-pattern>/AddBook</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddUser</display-name>
+    <servlet-name>AddUser</servlet-name>
+    <servlet-class>org.elibrary.control.AddUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddUser</servlet-name>
+    <url-pattern>/AddUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetBook</display-name>
+    <servlet-name>GetBook</servlet-name>
+    <servlet-class>org.elibrary.control.GetBook</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetBook</servlet-name>
+    <url-pattern>/GetBook</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Home</display-name>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>org.elibrary.control.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/</url-pattern>
+    <url-pattern>/Home</url-pattern>
   </servlet-mapping>
 </web-app>
